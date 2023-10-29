@@ -54,7 +54,7 @@ async def test_7seg(dut):
     dut.rst_n.value = 1
 
     # the compare value is shifted 10 bits inside the design to allow slower counting
-    max_count = 3
+    max_count = 4
     dut._log.info(f"check all segments with MAX_COUNT set to {max_count}")
     # check all segments and roll over
     for name, segment in enumerate(SEGMENTS):
@@ -65,7 +65,7 @@ async def test_7seg(dut):
             await ClockCycles(dut.clk, max_count)
             assert int(dut.segments.value) == segment[i % len(
                 segment
-            )], f'name ${name} segment ${i} (${i % len(segment)}) should be ${i:>08b} but was ${int(dut.segments.value):>08b}'
+            )], f'name {name} segment {i} ({i % len(segment)}) should be {segment[i % len(segment)]:>08b} but was {int(dut.segments.value):>08b}'
 
             # all bidirectionals are set to output
             assert dut.uio_oe == 0xFF
@@ -77,7 +77,7 @@ async def test_7seg(dut):
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
 
-    max_count = 3
+    max_count = 4
     dut._log.info(f"check all segments with MAX_COUNT set to {max_count}")
     # check all segments and roll over
     for name, segment in enumerate(SEGMENTS):
@@ -88,4 +88,4 @@ async def test_7seg(dut):
             await ClockCycles(dut.clk, max_count)
             assert int(dut.segments.value) == segment[i % len(
                 segment
-            )], f'name ${name} segment ${i} (${i % len(segment)}) should be ${i:>08b} but was ${int(dut.segments.value):>08b}'
+            )], f'name {name} segment {i} ({i % len(segment)}) should be {segment[i % len(segment)]:>08b} but was {int(dut.segments.value):>08b}'
