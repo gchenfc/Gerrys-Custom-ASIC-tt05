@@ -42,14 +42,14 @@ SEGMENTS = [  #
 @cocotb.test()
 async def test_7seg(dut):
     dut._log.info("start")
-    clock = Clock(dut.clk, 10, units="us")
+    clock = Clock(dut.clk, 100, units="ns")
     cocotb.start_soon(clock.start())
 
     # reset
     dut._log.info("reset")
     dut.rst_n.value = 0
     # set the compare value
-    dut.ui_in.value = 3
+    dut.ui_in.value = 0
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
 
@@ -63,7 +63,9 @@ async def test_7seg(dut):
         for i in range(20):
             dut._log.info("check segment {}".format(i))
             await ClockCycles(dut.clk, max_count)
-            assert int(dut.segments.value) == segment[i % len(segment)]
+            assert int(dut.segments.value) == segment[i % len(
+                segment
+            )], f'name ${name} segment ${i} (${i % len(segment)}) should be ${i:>08b} but was ${int(dut.segments.value):>08b}'
 
             # all bidirectionals are set to output
             assert dut.uio_oe == 0xFF
@@ -71,7 +73,7 @@ async def test_7seg(dut):
     # reset
     dut.rst_n.value = 0
     # set a different compare value
-    dut.ui_in.value = 3
+    dut.ui_in.value = 0
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
 
@@ -84,4 +86,6 @@ async def test_7seg(dut):
         for i in range(20):
             dut._log.info("check segment {}".format(i))
             await ClockCycles(dut.clk, max_count)
-            assert int(dut.segments.value) == segment[i % len(segment)]
+            assert int(dut.segments.value) == segment[i % len(
+                segment
+            )], f'name ${name} segment ${i} (${i % len(segment)}) should be ${i:>08b} but was ${int(dut.segments.value):>08b}'
