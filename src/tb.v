@@ -28,7 +28,7 @@ module tb ();
     wire [7:0] uio_out;
     wire [7:0] uio_oe;
 
-    tt_gchenfc_seven_segment_gerry tt_gchenfc_seven_segment_gerry (
+    tt_um_gchenfc_seven_segment_gerry tt_um_gchenfc_seven_segment_gerry (
     // include power ports for the Gate Level test
     `ifdef GL_TEST
         .VPWR( 1'b1),
