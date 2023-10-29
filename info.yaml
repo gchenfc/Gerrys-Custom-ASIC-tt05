@@ -47,9 +47,9 @@ documentation:
     - name bit 2
     - name bit 1
     - name bit 0
+    - clock divider bit 23
     - clock divider bit 22
     - clock divider bit 21
-    - clock divider bit 20
     - clock divider bit 1
     - clock divider bit 0
 # A description of what the outputs do (e.g. status LED, SPI MISO, etc)
