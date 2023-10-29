@@ -59,7 +59,6 @@ async def test_7seg(dut):
     # check all segments and roll over
     for name, segment in enumerate(SEGMENTS):
         dut.ui_in.value = 3 | (name << 5)
-        await ClockCycles(dut.clk, 1)
         for i in range(20):
             dut._log.info("check segment {}".format(i))
             await ClockCycles(dut.clk, max_count)
@@ -82,7 +81,6 @@ async def test_7seg(dut):
     # check all segments and roll over
     for name, segment in enumerate(SEGMENTS):
         dut.ui_in.value = 3 | (name << 5)
-        await ClockCycles(dut.clk, 1)
         for i in range(20):
             dut._log.info("check segment {}".format(i))
             await ClockCycles(dut.clk, max_count)
